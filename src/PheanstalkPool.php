@@ -26,14 +26,17 @@ class PheanstalkPool {
 
     public function useTube($tube) {
         $this->_using = $tube;
+        return $this;
     }
 
     public function watch($tube) {
         $this->_watching[$tube] = true;
+        return $this;
     }
 
     public function ignore($tube) {
         unset($this->_watching[$tube]);
+        return $this;
     }
 
     public function reserve($timeout) {
@@ -52,7 +55,6 @@ class PheanstalkPool {
         if ($count == count($this->_connections)) {
             throw new Exception\SocketException("all server down");
         }
-        return false;
     }
 
     public function put(
