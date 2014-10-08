@@ -18,13 +18,16 @@ class Job
 
     private $_id;
     private $_data;
+    private $_conn;
 
     /**
-     * @param int    $id   The job ID
-     * @param string $data The job data
+     * @param Pheanstalk  $client  The Pheanstalk Object
+     * @param int         $id      The job ID
+     * @param string      $data    The job data
      */
-    public function __construct($id, $data)
+    public function __construct($client, $id, $data)
     {
+        $this->_client = $client;
         $this->_id = (int) $id;
         $this->_data = $data;
     }
@@ -45,5 +48,43 @@ class Job
     public function getData()
     {
         return $this->_data;
+    }
+
+    public function getClient()
+    {
+        return $this->_client;
+    }
+
+    public function delete()
+    {
+        $this->_client->delete($this);
+    }
+
+    public function release(
+        $priority = PheanstalkInterface::DEFAULT_PRIORITY,
+        $delay = PheanstalkInterface::DEFAULT_DELAY
+    )
+    {
+        $this->_client->release($this, $priority, $delay);
+    }
+
+    public function bury($priority = PheanstalkInterface::DEFAULT_PRIORITY)
+    {
+        $this->_client->bury($this, $priority);
+    }
+
+    public function kick()
+    {
+        $this->_client->kickJob($this);
+    }
+
+    public function touch()
+    {
+        $this->_client->touch($this);
+    }
+
+    public function stats()
+    {
+        return $this->_client->statsJob($this);
     }
 }

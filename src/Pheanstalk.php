@@ -161,7 +161,7 @@ class Pheanstalk implements PheanstalkInterface
             new Command\PeekCommand($jobId)
         );
 
-        return new Job($response['id'], $response['jobdata']);
+        return new Job($this, $response['id'], $response['jobdata']);
     }
 
     /**
@@ -177,7 +177,7 @@ class Pheanstalk implements PheanstalkInterface
             new Command\PeekCommand(Command\PeekCommand::TYPE_READY)
         );
 
-        return new Job($response['id'], $response['jobdata']);
+        return new Job($this, $response['id'], $response['jobdata']);
     }
 
     /**
@@ -193,7 +193,7 @@ class Pheanstalk implements PheanstalkInterface
             new Command\PeekCommand(Command\PeekCommand::TYPE_DELAYED)
         );
 
-        return new Job($response['id'], $response['jobdata']);
+        return new Job($this, $response['id'], $response['jobdata']);
     }
 
     /**
@@ -209,7 +209,7 @@ class Pheanstalk implements PheanstalkInterface
             new Command\PeekCommand(Command\PeekCommand::TYPE_BURIED)
         );
 
-        return new Job($response['id'], $response['jobdata']);
+        return new Job($this, $response['id'], $response['jobdata']);
     }
 
     /**
@@ -278,7 +278,7 @@ class Pheanstalk implements PheanstalkInterface
         if (in_array($response->getResponseName(), $falseResponses)) {
             return false;
         } else {
-            return new Job($response['id'], $response['jobdata']);
+            return new Job($this, $response['id'], $response['jobdata']);
         }
     }
 
