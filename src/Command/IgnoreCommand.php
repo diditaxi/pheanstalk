@@ -46,9 +46,9 @@ class IgnoreCommand
             ));
         } elseif ($responseLine == Response::RESPONSE_NOT_IGNORED) {
             throw new Exception\ServerException($responseLine .
-                ': cannot ignore last tube in watchlist');
+                ': cannot ignore last tube in watchlist', 10301);
         } else {
-            throw new Exception('Unhandled response: '.$responseLine);
+            throw new Exception('Unhandled response: '.$responseLine, 10302);
         }
     }
 }

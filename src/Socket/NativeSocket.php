@@ -37,7 +37,7 @@ class NativeSocket implements Socket
             ->fsockopen($host, $port, $errno, $errstr, $connectTimeout);
 
         if (!$this->_socket) {
-            throw new Exception\ConnectionException($errno, $errstr . " (connecting to $host:$port)");
+            throw new Exception\ConnectionException($errno, $errstr . " (connecting to $host:$port)", 20101);
         }
 
         $this->_wrapper()
@@ -61,7 +61,7 @@ class NativeSocket implements Socket
                 throw new Exception\SocketException(sprintf(
                     'fwrite() failed to write data after %u tries',
                     self::WRITE_RETRIES
-                ));
+                ), 20102);
             }
         }
     }
@@ -79,7 +79,7 @@ class NativeSocket implements Socket
                 ->fread($this->_socket, $length - $read);
 
             if ($data === false) {
-                throw new Exception\SocketException('fread() returned false');
+                throw new Exception\SocketException('fread() returned false', 20103);
             }
 
             $read += strlen($data);
@@ -100,7 +100,7 @@ class NativeSocket implements Socket
                 $this->_wrapper()->fgets($this->_socket);
 
             if ($this->_wrapper()->feof($this->_socket)) {
-                throw new Exception\SocketException("Socket closed by server!");
+                throw new Exception\SocketException("Socket closed by server!", 20104);
             }
         } while ($data === false);
 

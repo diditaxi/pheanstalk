@@ -52,11 +52,11 @@ class BuryCommand
                 '%s: Job %u is not reserved or does not exist.',
                 $responseLine,
                 $this->_job->getId()
-            ));
+            ), 10101);
         } elseif ($responseLine == Response::RESPONSE_BURIED) {
             return $this->_createResponse(Response::RESPONSE_BURIED);
         } else {
-            throw new Exception('Unhandled response: '.$responseLine);
+            throw new Exception('Unhandled response: '.$responseLine, 10102);
         }
     }
 }

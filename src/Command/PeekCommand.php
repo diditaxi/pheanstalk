@@ -45,7 +45,7 @@ class PeekCommand
         } else {
             throw new Exception\CommandException(sprintf(
                 'Invalid peek subject: %s', $peekSubject
-            ));
+            ), 10601);
         }
     }
 
@@ -79,7 +79,7 @@ class PeekCommand
                 );
             }
 
-            throw new Exception\ServerException($message);
+            throw new Exception\ServerException($message, 10602);
         } elseif (preg_match('#^FOUND (\d+) \d+$#', $responseLine, $matches)) {
             return $this->_createResponse(
                 Response::RESPONSE_FOUND,

@@ -52,11 +52,11 @@ class PauseTubeCommand
                 '%s: tube %s does not exist.',
                 $responseLine,
                 $this->_tube
-            ));
+            ), 10501);
         } elseif ($responseLine == Response::RESPONSE_PAUSED) {
             return $this->_createResponse(Response::RESPONSE_PAUSED);
         } else {
-            throw new Exception('Unhandled response: '.$responseLine);
+            throw new Exception('Unhandled response: '.$responseLine, 10502);
         }
     }
 }

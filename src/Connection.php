@@ -97,7 +97,7 @@ class Connection
                 "%s in response to '%s'",
                 $responseName,
                 $command
-            ));
+            ), 20001);
         }
 
         if (in_array($responseName, self::$_dataResponses)) {
@@ -110,7 +110,7 @@ class Connection
                     'Expected %u bytes of CRLF after %u bytes of data',
                     self::CRLF_LENGTH,
                     $dataLength
-                ));
+                ), 20002);
             }
         } else {
             $data = null;

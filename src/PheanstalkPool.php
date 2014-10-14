@@ -13,7 +13,7 @@ class PheanstalkPool {
 
     public function __construct($hosts, $connectTimeout = null) {
         if (!is_array($hosts)) {
-            throw new ClientException("hosts must be array");
+            throw new ClientException("hosts must be array", 30001);
         }
 
         $this->_connections = array();
@@ -53,7 +53,7 @@ class PheanstalkPool {
             }
         }
         if ($count == count($this->_connections)) {
-            throw new Exception\SocketException("all server down");
+            throw new Exception\SocketException("all server down", 30002);
         }
     }
 
@@ -72,7 +72,7 @@ class PheanstalkPool {
                 $this->_pushBackConn();
             }
         }
-        throw new Exception\SocketException("all server down");
+        throw new Exception\SocketException("all server down", 30003);
     }
 
     private function _reserveOne($conn, $timeout) {
