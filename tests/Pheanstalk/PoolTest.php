@@ -87,16 +87,16 @@ class PoolTest extends \PHPUnit_Framework_TestCase
         $c2->put($txt2);
         $job2 = $pool->reserve(0);
         $this->assertEquals(
-            $job1->getClient()->listTubesWatched(),
+            $job2->getClient()->listTubesWatched(),
             array($tube1, $tube2)
         );
 
         $pool->useTube($tube3);
         $pool->put($txt3);
+        $pool->watch($tube3);
         $job3 = $pool->reserve(0);
-
         $this->assertEquals(
-            $job1->getClient()->listTubeUsed(),
+            $job3->getClient()->listTubeUsed(),
             $tube3
         );
     }
