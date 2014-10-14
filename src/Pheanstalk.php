@@ -270,13 +270,11 @@ class Pheanstalk implements PheanstalkInterface
             new Command\ReserveCommand($timeout)
         );
 
-        $falseResponses = array(
-            Response::RESPONSE_DEADLINE_SOON,
-            Response::RESPONSE_TIMED_OUT,
-        );
-
-        if (in_array($response->getResponseName(), $falseResponses)) {
+        $respName = $response->getResponseName();
+        if ($respName == Response::RESPONSE_TIMED_OUT) {
             return false;
+        } else if ($respName == Response::RESPONSE_DEADLINE_SOON) {
+            throw new Exception\DeadlineSoonException('deadline soon', 30101);
         } else {
             return new Job($this, $response['id'], $response['jobdata']);
         }
