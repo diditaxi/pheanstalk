@@ -55,6 +55,7 @@ class PheanstalkPool {
         if ($count == count($this->_connections)) {
             throw new Exception\SocketException("all server down", 30002);
         }
+        return false;
     }
 
     public function put(
