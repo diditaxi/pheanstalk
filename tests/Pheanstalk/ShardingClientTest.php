@@ -43,7 +43,7 @@ class ShardingClientTest extends \PHPUnit_Framework_TestCase
         $client1->useTube("100");
         $client1->put("100");
 
-        $client2->watch("100");
+        $client2->watchOnly("100");
         $job = $client2->reserve(0);
         $this->assertEquals($job->getData(), "100");
         $this->assertEquals($job->getClient()->getConnection()->getPort(), 11308);

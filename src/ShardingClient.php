@@ -39,7 +39,7 @@ class ShardingClient {
         return $this;
     }
 
-    public function watch($tube) {
+    public function watchOnly($tube) {
         $this->_watching = $tube;
         return $this;
     }
