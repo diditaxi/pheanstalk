@@ -2,9 +2,6 @@
 
 namespace Pheanstalk;
 
-use Pheanstalk\Exception\ClientException;
-
-
 class PheanstalkPool {
 
     private $_connections;
