@@ -36,14 +36,14 @@ class YamlResponseParser
             throw new Exception\ServerException(sprintf(
                 'Server reported %s',
                 $responseLine
-            ));
+            ), 20201);
         }
 
         if (!preg_match('#^OK \d+$#', $responseLine)) {
             throw new Exception\ServerException(sprintf(
                 'Unhandled response: %s',
                 $responseLine
-            ));
+            ), 20202);
         }
 
         $dataLines = preg_split("#[\r\n]+#", rtrim($responseData));
@@ -58,7 +58,7 @@ class YamlResponseParser
             $array = array();
             foreach ($data as $line) {
                 if (!preg_match('#(\S+):\s*(.*)#', $line, $matches)) {
-                    throw new Exception("YAML parse error for line: $line");
+                    throw new Exception("YAML parse error for line: $line", 20203);
                 }
 
                 list(, $key, $value) = $matches;

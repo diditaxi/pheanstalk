@@ -15,9 +15,10 @@ class ConnectionException
     /**
      * @param int    $errno  The connection error code
      * @param string $errstr The connection error message
+     * @param int    $code   The custom error code
      */
-    public function __construct($errno, $errstr)
+    public function __construct($errno, $errstr, $code = 0)
     {
-        parent::__construct(sprintf('Socket error %d: %s', $errno, $errstr));
+        parent::__construct(sprintf('Socket error %d: %s', $errno, $errstr), $code);
     }
 }

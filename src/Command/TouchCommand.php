@@ -50,7 +50,7 @@ class TouchCommand
                 'Job %u %s: does not exist or is not reserved by client',
                 $this->_job->getId(),
                 $responseLine
-            ));
+            ), 10901);
         }
 
         return $this->_createResponse($responseLine);

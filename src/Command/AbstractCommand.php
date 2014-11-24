@@ -28,7 +28,7 @@ abstract class AbstractCommand
      */
     public function getData()
     {
-        throw new Exception\CommandException('Command has no data');
+        throw new Exception\CommandException('Command has no data', 10001);
     }
 
     /* (non-phpdoc)
@@ -36,7 +36,7 @@ abstract class AbstractCommand
      */
     public function getDataLength()
     {
-        throw new Exception\CommandException('Command has no data');
+        throw new Exception\CommandException('Command has no data', 10002);
     }
 
     /* (non-phpdoc)

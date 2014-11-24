@@ -45,7 +45,7 @@ class DeleteCommand
                 'Cannot delete job %u: %s',
                 $this->_job->getId(),
                 $responseLine
-            ));
+            ), 10201);
         }
 
         return $this->_createResponse($responseLine);

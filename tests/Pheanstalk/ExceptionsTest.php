@@ -25,7 +25,7 @@ class ExceptionsTest extends \PHPUnit_Framework_TestCase
 
     public function testConnectionException()
     {
-        $e = new Exception\ConnectionException(10, 'test');
+        $e = new Exception\ConnectionException(10, 'test', 12345);
         $this->assertInstanceOf('\Pheanstalk\Exception\ClientException', $e);
     }
 

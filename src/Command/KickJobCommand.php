@@ -49,11 +49,11 @@ class KickJobCommand
                 '%s: Job %d does not exist or is not in a kickable state.',
                 $responseLine,
                 $this->_job->getId()
-            ));
+            ), 10401);
         } elseif ($responseLine == Response::RESPONSE_KICKED) {
             return $this->_createResponse(Response::RESPONSE_KICKED);
         } else {
-            throw new Exception('Unhandled response: '.$responseLine);
+            throw new Exception('Unhandled response: '.$responseLine, 10402);
         }
     }
 }

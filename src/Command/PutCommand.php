@@ -92,22 +92,22 @@ class PutCommand
             throw new Exception(sprintf(
                 '%s: server ran out of memory trying to grow the priority queue data structure.',
                 $responseLine
-            ));
+            ), 10701);
         } elseif (preg_match('#^JOB_TOO_BIG$#', $responseLine)) {
             throw new Exception(sprintf(
                 '%s: job data exceeds server-enforced limit',
                 $responseLine
-            ));
+            ), 10702);
         } elseif (preg_match('#^EXPECTED_CRLF#', $responseLine)) {
             throw new Exception(sprintf(
                 '%s: CRLF expected',
                 $responseLine
-            ));
+            ), 10703);
         } else {
             throw new Exception(sprintf(
                 'Unhandled response: %s',
                 $responseLine
-            ));
+            ), 10704);
         }
     }
 }

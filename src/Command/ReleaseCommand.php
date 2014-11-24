@@ -56,7 +56,7 @@ class ReleaseCommand
                 'Job %u %s: out of memory trying to grow data structure',
                 $this->_job->getId(),
                 $responseLine
-            ));
+            ), 10801);
         }
 
         if ($responseLine == Response::RESPONSE_NOT_FOUND) {
@@ -64,7 +64,7 @@ class ReleaseCommand
                 'Job %u %s: does not exist or is not reserved by client',
                 $this->_job->getId(),
                 $responseLine
-            ));
+            ), 10802);
         }
 
         return $this->_createResponse($responseLine);
